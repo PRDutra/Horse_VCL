@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{38A3C389-976D-49C3-95F5-84EDC00D31B0}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Servico\ServicoTeste.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Aplicacao\VisualizarTarefas.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ServicoTeste">
+        <MSBuild Projects="Servico\ServicoTeste.dproj"/>
+    </Target>
+    <Target Name="ServicoTeste:Clean">
+        <MSBuild Projects="Servico\ServicoTeste.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ServicoTeste:Make">
+        <MSBuild Projects="Servico\ServicoTeste.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="VisualizarTarefas">
+        <MSBuild Projects="Aplicacao\VisualizarTarefas.dproj"/>
+    </Target>
+    <Target Name="VisualizarTarefas:Clean">
+        <MSBuild Projects="Aplicacao\VisualizarTarefas.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="VisualizarTarefas:Make">
+        <MSBuild Projects="Aplicacao\VisualizarTarefas.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ServicoTeste;VisualizarTarefas"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ServicoTeste:Clean;VisualizarTarefas:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ServicoTeste:Make;VisualizarTarefas:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
